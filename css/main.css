@@ -516,9 +516,11 @@ aside {
     }
 
     .aside-visible {
+        width: 100%;
         transform: translateX(0);
         opacity: 1;
         visibility: visible;
+        
     }
 
     .boton-menu.active::before,
@@ -527,7 +529,7 @@ aside {
     }
 
     .contenedor-productos {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .header-mobile {
