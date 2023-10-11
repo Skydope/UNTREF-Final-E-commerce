@@ -27,6 +27,9 @@ img:where(.swal2-image) {
 }
 
 /* Estilos para la sección de detalles del producto */
+.product-image{
+    display: flex;
+}
 .product-details {
     padding-left: 2%;
     text-align: left;
@@ -59,3 +62,40 @@ img:where(.swal2-image) {
     font-weight: bold;
     color: var(--clr-red); 
 }
+
+
+
+
+
+
+Swal.fire({
+    imageUrl: `${producto.imagen}`,
+    imageWidth: 261,
+    imageHeight: 392,
+    imageAlt: `Caratula del juego: ${producto.nombre}`,
+    showClass: {
+        popup: 'animate__animated animate__fadeInUpBig'
+    },
+    hideClass: {
+        popup: 'animate__animated animate__fadeOutDownBig'
+    },
+    html: `
+    <article class="product-popup">
+        <figure class="product-image">
+            
+        </figure>
+        <section class="product-details">
+            <h2>${producto.titulo}</h2>
+            <h3 class="product-desc-title">Descripción:</h3>
+            <p class="product-description">${producto.descripcion}</p>
+            <p class="product-price">$${producto.precio}</p>
+            <button class="producto-agregar" id="${producto.id}"> <i class="fa-solid fa-cart-shopping"></i> Agregar al carrito</button>
+        </section>
+    </article>`,
+    confirmButtonText: 'Cerrar',
+    confirmButtonColor: "var(--clr-gray)",
+    customClass: {
+        popup: 'custom-popup',
+    },
+    width: '600', // Personaliza el ancho del popup según tus necesidades
+});

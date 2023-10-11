@@ -1,6 +1,6 @@
 // Se define un arreglo para almacenar productos.
 let productos = [];
-const URL_API = "https://run.mocky.io/v3/b964dd4a-353a-4a79-83b7-a4630187b170"
+const URL_API = "https://run.mocky.io/v3/c1c5ced9-f4f9-4fdd-957d-f3aa8f968db0"
 // Se realiza una solicitud HTTP fetch para obtener datos de un archivo JSON.
 async function obtenerProductos() {
     try {
@@ -22,15 +22,18 @@ async function obtenerProductos() {
   
 // Se seleccionan elementos del DOM.
 const contenedorProductos = document.querySelector("#contenedor-productos");
+const paginaProducto = document.querySelector("#product-page")
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal");
 let botonesAgregar = document.querySelectorAll(".producto-agregar");
 const numerito = document.querySelector("#numerito");
 
+
 // Se agrega un oyente de eventos a los botones de categoría para ocultar un aside.
 botonesCategorias.forEach(boton => boton.addEventListener("click", () => {
     aside.classList.remove("aside-visible");
 }));
+
 
 // Función para mostrar un popup al hacer clic en un producto.
 function mostrarPopUp() {
@@ -45,37 +48,37 @@ function mostrarPopUp() {
             const producto = productos.find((p) => p.id === productId);
 
             if (producto) {
-                Swal.fire({
-                    imageUrl: `${producto.imagen}`,
-                    imageWidth: 261,
-                    imageHeight: 392,
-                    imageAlt: `Caratula del juego: ${producto.nombre}`,
-                    showClass: {
-                        popup: 'animate__animated animate__fadeInUpBig'
-                    },
-                    hideClass: {
-                        popup: 'animate__animated animate__fadeOutDownBig'
-                    },
-                    html: `
-                    <article class="product-popup">
-                        <figure class="product-image">
-                            
-                        </figure>
-                        <section class="product-details">
-                            <h2>${producto.titulo}</h2>
-                            <h3 class="product-desc-title">Descripción:</h3>
-                            <p class="product-description">${producto.descripcion}</p>
-                            <p class="product-price">$${producto.precio}</p>
-                            <button class="producto-agregar" id="${producto.id}"> <i class="fa-solid fa-cart-shopping"></i> Agregar al carrito</button>
-                        </section>
-                    </article>`,
-                    confirmButtonText: 'Cerrar',
-                    confirmButtonColor: "var(--clr-gray)",
-                    customClass: {
-                        popup: 'custom-popup',
-                    },
-                    width: '600', // Personaliza el ancho del popup según tus necesidades
-                });
+                tituloPrincipal.innerText=`${producto.titulo}`
+                tituloPrincipal.classList.add("text-right")
+                contenedorProductos.classList.add("disabled")
+                paginaProducto.classList.remove("disabled")
+              paginaProducto.innerHTML = `<article class="product-popup">
+              <section class="product-details">
+                <figure class="video-container">
+                <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/${producto.trailer}"
+                frameborder="0"
+                 allowfullscreen
+                ></iframe> </figure>
+                  <h3 class="product-desc-title">Descripción:</h3>
+                  <p class="product-description">${producto.descripcion}</p>
+                  </section>
+                  <section class="product-right">
+                  <h4 class="product-title">${producto.titulo}</h4>
+                  <figure class="product-figure">
+              <img class="product-image" src="${producto.imagen}" alt="Caratula del juego: ${producto.nombre}">
+              </figure>
+                  <p class="product-price">Precio: $${producto.precio}</p>
+                  <section class="btns-page">
+                  <button class="carrito-acciones-comprar" id="comprar-ya"> Comprar Ahora</button>
+                  <button class="producto-agregar" id="${producto.id}">Agregar al carrito</button>
+                  </section>
+                  </section>
+                  
+          </article>
+          `
             } else {
                 console.error(`No se encontró el producto con id: ${productId}`);
             }
@@ -85,6 +88,8 @@ function mostrarPopUp() {
 
     });
 }
+
+
 
 
 // Función para cargar productos en el contenedor.
@@ -97,7 +102,7 @@ function cargarProductos(productosElegidos) {
         const article = document.createElement("article");
         article.classList.add("producto");
         article.innerHTML = `
-            <figure id="figure-producto" data-product-id="${producto.id}"><img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+            <figure id="figure-producto" data-product-id="${producto.id}" class="figure-producto"><img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
             <figcaption class="producto-detalles">
                 <h3 class="producto-titulo">${producto.titulo}</h3>
                 <p class="producto-precio">$${producto.precio}</p>
@@ -126,9 +131,13 @@ botonesCategorias.forEach(boton => {
             const productoCategoria = productos.find(producto => producto.categoria.id === e.currentTarget.id);
             tituloPrincipal.innerText = productoCategoria.categoria.nombre;
             const productosBoton = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
+            contenedorProductos.classList.remove("disabled")
+            paginaProducto.classList.add("disabled")
             cargarProductos(productosBoton);
         } else {
             tituloPrincipal.innerText = "Todos los juegos";
+            contenedorProductos.classList.remove("disabled")
+            paginaProducto.classList.add("disabled")
             cargarProductos(productos);
         }
     });
@@ -190,4 +199,72 @@ function actualizarNumerito() {
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numerito.innerText = nuevoNumerito;
 }
+
+
+
+function comprarCarrito() {
+    Swal.fire({
+        title: 'Pedido de Tarjeta de Crédito',
+        imageUrl: "./img/credit-card-payment-svgrepo-com.svg",
+        imageWidth: "200px",
+        html: 'Por favor, ingrese los detalles de su tarjeta de crédito:' + 
+            '<input type="text" id="tarjeta" class="swal2-input" placeholder="Número de tarjeta" >' +
+            '<input type="text" id="cvv" class="swal2-input" placeholder="CVV">' +
+            '<input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)">',
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonColor: "var(--clr-gray)",
+        confirmButtonText: 'Comprar',
+        cancelButtonText: 'Cancelar',
+        preConfirm: () => {
+            const tarjeta = Swal.getPopup().querySelector('#tarjeta').value;
+            const cvv = Swal.getPopup().querySelector('#cvv').value;
+            const fecha = Swal.getPopup().querySelector('#fecha').value;
+
+            // Puedes validar los datos ingresados aquí
+
+            // Simulación de envío de datos de tarjeta
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve();
+                }, 2000); // Simula un retraso de 2 segundos
+
+            });
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Pedido Enviado',
+                icon: 'success',
+                text: 'Gracias por su compra. En breve llegara el recibo a su correo de e-mail',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+        }
+    });
+
+    // Agregar eventos de escucha para el formato de tarjeta y fecha
+    const tarjetaInput = Swal.getPopup().querySelector('#tarjeta');
+    tarjetaInput.addEventListener('input', (e) => {
+        const formattedValue = e.target.value.replace(/\D/g, '').replace(/(\d{4})/g, '$1-').slice(0, 19);
+        e.target.value = formattedValue;
+    });
+
+    const fechaInput = Swal.getPopup().querySelector('#fecha');
+    fechaInput.addEventListener('input', (e) => {
+        const formattedValue = e.target.value.replace(/\D/g, '').replace(/(\d{2})(\d{2})/, '$1/$2').slice(0, 5);
+        e.target.value = formattedValue;
+    });
+
+    // Evitar caracteres no numéricos en CVV
+    const cvvInput = Swal.getPopup().querySelector('#cvv');
+    cvvInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/\D/g, '').slice(0, 3);
+    });
+}
+
+
 
