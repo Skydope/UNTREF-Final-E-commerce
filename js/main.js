@@ -75,7 +75,7 @@ function mostrarPopUp() {
                   <p class="product-price">Precio: $${producto.precio}</p>
                   <section class="btns-page">
                   <button class="carrito-acciones-comprar" id="comprar-ya"> Comprar Ahora</button>
-                  <button class="producto-agregar" id="${producto.id}">Agregar al carrito</button>
+                  <button class="producto-agregar" id="${producto.id}"><i class="fa-solid fa-cart-shopping carrito-icon"></i>Agregar al carrito</button>
                   </section>
                   </section>
                   
@@ -174,14 +174,16 @@ function agregarAlCarrito(e) {
     // Se muestra un mensaje de éxito mediante un toast.
     Swal.fire({
         icon: 'success',
+        iconColor: `#282828`,
         title: 'Éxito',
         text: 'El producto se ha agregado al carrito',
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000
+        timer: 3000,
+        background: `#ffee00`
     });
-
+    
     const idBoton = e.currentTarget.id;
     const productoAgregado = productos.find(producto => producto.id === idBoton);
 
@@ -218,14 +220,22 @@ function comprarCarrito() {
         imageUrl: "./img/tarjeta.svg",
         imageWidth: "200px",
         html: 'Por favor, ingrese los detalles de su tarjeta de crédito:' + 
-            '<input type="text" id="tarjeta" class="swal2-input" placeholder="Número de tarjeta" >' +
-            '<input type="text" id="cvv" class="swal2-input" placeholder="CVV">' +
-            '<input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)">',
+           ` <form class="formu-tarjeta">
+            <label for="tarjeta">Número de tarjeta</label>
+            <input type="text" id="tarjeta" class="swal2-input" placeholder="Número de tarjeta">
+            <label for="cvv">CVV</label> 
+            <input type="text" id="cvv" class="swal2-input" placeholder="CVV">
+            <label for="fecha">Fecha de Vencimiento</label>
+            <input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)" label="hola">
+            </form>`,
         showCancelButton: true,
         focusConfirm: false,
         confirmButtonColor: "var(--clr-gray)",
         confirmButtonText: 'Comprar',
         cancelButtonText: 'Cancelar',
+        background: `#ffee00`,
+        color: '#282828',
+        allowOutsideClick: `false`,
         preConfirm: () => {
             const tarjeta = Swal.getPopup().querySelector('#tarjeta').value;
             const cvv = Swal.getPopup().querySelector('#cvv').value;

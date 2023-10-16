@@ -25,6 +25,7 @@ ul {
     list-style-type: none;
 }
 
+
 a {
     text-decoration: none;
 }
@@ -177,10 +178,6 @@ aside {
 }
 
 .producto-agregar {
-    display: flex;
-    margin: 0 auto;
-    border: 0;
-    margin-top: 2rem;
     background-color: transparent;
     color: var(--clr-main);
     padding: 1rem;
@@ -190,6 +187,10 @@ aside {
     border: 2px solid var(--clr-main);
     transition: background-color .2s, color .2s;
     font-weight: bold;
+}
+
+.carrito-icon{
+    padding-right: 1rem;
 }
 
 .producto-agregar:hover {
@@ -214,6 +215,22 @@ aside {
     background-color: var(--clr-main-light); /* Fondo blanco */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
     text-align: center;
+}
+ /* Formulario de tarjeta */
+.formu-tarjeta{
+    display: flex;
+    flex-direction: column;
+    color: var(--clr-black);
+}
+
+.formu-tarjeta label{
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.formu-tarjeta input::placeholder{
+    color: var(--clr-gray);
+    font-style: italic;
 }
 
 /* Estilos para el contenedor del producto */
@@ -273,10 +290,10 @@ aside {
     height: 100%;
 }
 
-
+/* 
 .product-details {
 
-}
+} */
 .product-description{
     width: 60ch;
     color: var(--clr-white);
@@ -316,6 +333,9 @@ aside {
     margin-top: 2rem;
 }
 
+.atras:hover{
+    color: var(--clr-main-light);
+}
 
 
 /** CARRITO **/

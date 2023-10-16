@@ -151,10 +151,17 @@ function comprarCarrito() {
         imageUrl: "./img/tarjeta.svg",
         imageWidth: "200px",
         html: 'Por favor, ingrese los detalles de su tarjeta de crédito:' + 
-            '<input type="text" id="tarjeta" class="swal2-input" placeholder="Número de tarjeta" >' +
-            '<input type="text" id="cvv" class="swal2-input" placeholder="CVV">' +
-            '<input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)">',
+           ` <form class="formu-tarjeta">
+            <label for="tarjeta">Número de tarjeta</label>
+            <input type="text" id="tarjeta" class="swal2-input" placeholder="Número de tarjeta">
+            <label for="cvv">CVV</label> 
+            <input type="text" id="cvv" class="swal2-input" placeholder="CVV">
+            <label for="fecha">Fecha de Vencimiento</label>
+            <input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)" label="hola">
+            </form>`,
         showCancelButton: true,
+        background: `#ffee00`,
+        color: `#282828`,
         focusConfirm: false,
         confirmButtonColor: "var(--clr-gray)",
         confirmButtonText: 'Comprar',
