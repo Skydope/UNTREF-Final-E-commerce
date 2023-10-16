@@ -148,7 +148,7 @@ botonComprar.addEventListener("click", comprarCarrito);
 function comprarCarrito() {
     Swal.fire({
         title: 'Pedido de Tarjeta de Crédito',
-        imageUrl: "./img/credit-card-payment-svgrepo-com.svg",
+        imageUrl: "./img/tarjeta.svg",
         imageWidth: "200px",
         html: 'Por favor, ingrese los detalles de su tarjeta de crédito:' + 
             '<input type="text" id="tarjeta" class="swal2-input" placeholder="Número de tarjeta" >' +
