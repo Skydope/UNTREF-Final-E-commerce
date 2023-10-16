@@ -310,6 +310,12 @@ aside {
     color: var(--clr-main-light); 
 }
 
+.atras{
+    color: var(--clr-main);
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
 
 
 /** CARRITO **/

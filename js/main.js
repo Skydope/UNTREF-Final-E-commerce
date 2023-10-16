@@ -27,6 +27,7 @@ const botonesCategorias = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal");
 let botonesAgregar = document.querySelectorAll(".producto-agregar");
 const numerito = document.querySelector("#numerito");
+const atras = document.querySelector("#atras")
 
 
 // Se agrega un oyente de eventos a los botones de categoría para ocultar un aside.
@@ -52,6 +53,7 @@ function mostrarPopUp() {
                 tituloPrincipal.classList.add("text-right")
                 contenedorProductos.classList.add("disabled")
                 paginaProducto.classList.remove("disabled")
+                atras.classList.remove("disabled")
               paginaProducto.innerHTML = `<article class="product-popup">
               <section class="product-details">
                 <figure class="video-container">
@@ -78,12 +80,14 @@ function mostrarPopUp() {
                   </section>
                   
           </article>
+          
           `
             } else {
                 console.error(`No se encontró el producto con id: ${productId}`);
             }
 
             actualizarBotonesAgregar();
+            comprarYa()
         });
 
     });
@@ -200,6 +204,12 @@ function actualizarNumerito() {
     numerito.innerText = nuevoNumerito;
 }
 
+// Función para agregar la opcion de comprar ya 
+function comprarYa(){
+    const comprarYaBtn = document.querySelector("#comprar-ya")
+    comprarYaBtn.addEventListener("click", comprarCarrito)
+}
+
 
 
 function comprarCarrito() {
@@ -245,6 +255,8 @@ function comprarCarrito() {
 
         }
     });
+
+
 
     // Agregar eventos de escucha para el formato de tarjeta y fecha
     const tarjetaInput = Swal.getPopup().querySelector('#tarjeta');
