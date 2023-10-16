@@ -334,7 +334,8 @@ aside {
 }
 
 .atras:hover{
-    color: var(--clr-main-light);
+    color: white;
+    scale: 1.2;
 }
 
 

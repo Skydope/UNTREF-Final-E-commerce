@@ -74,7 +74,7 @@ function mostrarPopUp() {
               </figure>
                   <p class="product-price">Precio: $${producto.precio}</p>
                   <section class="btns-page">
-                  <button class="carrito-acciones-comprar" id="comprar-ya"> Comprar Ahora</button>
+                  <button class="carrito-acciones-comprar" id="comprar-ya"> <i class="fa-regular fa-credit-card"></i> Comprar Ahora</button>
                   <button class="producto-agregar" id="${producto.id}"><i class="fa-solid fa-cart-shopping carrito-icon"></i>Agregar al carrito</button>
                   </section>
                   </section>
@@ -226,7 +226,9 @@ function comprarCarrito() {
             <label for="cvv">CVV</label> 
             <input type="text" id="cvv" class="swal2-input" placeholder="CVV">
             <label for="fecha">Fecha de Vencimiento</label>
-            <input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)" label="hola">
+            <input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)">
+            <label for="correo">Su dirección de E-mail</label>
+            <input type="email" id="correo" class="swal2-input" placeholder="ejemplo@gmail.com">
             </form>`,
         showCancelButton: true,
         focusConfirm: false,
@@ -256,11 +258,14 @@ function comprarCarrito() {
             Swal.fire({
                 title: 'Pedido Enviado',
                 icon: 'success',
+                iconColor: '#282828',
                 text: 'Gracias por su compra. En breve llegara el recibo a su correo de e-mail',
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 3000,
+                background: `#ffee00`,
+                color: '#282828'
             });
 
         }

@@ -90,12 +90,15 @@ function actualizarBotonesEliminar() {
 function eliminarDelCarrito(e) {
     Swal.fire({
         icon: 'success',
+        iconColor: '#282828',
         title: 'Éxito',
         text: 'El producto se ha eliminado del carrito',
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000
+        timer: 3000,
+        background: `#ffee00`,
+        color: '#282828'
     });
 
     const idBoton = e.currentTarget.id;
@@ -114,6 +117,7 @@ function vaciarCarrito() {
     Swal.fire({
         title: '¿Estás seguro?',
         icon: 'question',
+        iconColor: '#282828',
         html: `Se van a borrar ${productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)} productos.`,
         showCancelButton: true,
         focusConfirm: false,
@@ -157,7 +161,9 @@ function comprarCarrito() {
             <label for="cvv">CVV</label> 
             <input type="text" id="cvv" class="swal2-input" placeholder="CVV">
             <label for="fecha">Fecha de Vencimiento</label>
-            <input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)" label="hola">
+            <input type="text" id="fecha" class="swal2-input" placeholder="Vencimiento (MM/YY)">
+            <label for="correo">Su dirección de E-mail</label>
+            <input type="email" id="correo" class="swal2-input" placeholder="ejemplo@gmail.com">
             </form>`,
         showCancelButton: true,
         background: `#ffee00`,
@@ -186,11 +192,14 @@ function comprarCarrito() {
             Swal.fire({
                 title: 'Pedido Enviado',
                 icon: 'success',
+                iconColor: '#282828',
                 text: 'Gracias por su compra. En breve llegara el recibo a su correo de e-mail',
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 3000,
+                background: `#ffee00`,
+                color: '#282828'
             });
             productosEnCarrito.length = 0;
             localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
